@@ -1,0 +1,152 @@
+﻿<Window x:Class="T3._1_PixelArt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:T3._1_PixelArt"
+        mc:Ignorable="d"
+        Title="Pixel Art" Height="680.189" Width="800" MinHeight="560" MinWidth="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="#FEF1E6"/>
+            <Setter Property="Foreground" Value="#521808"/>
+            <Setter Property="BorderBrush" Value="#521808"/>
+        </Style>
+        
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Background" Value="#FEF1E6"/>
+            <Setter Property="Foreground" Value="#521808"/>
+            <Setter Property="BorderThickness" Value="0.75"/>
+            <Setter Property="BorderBrush" Value="#521808"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="ConfigurarBorde" BasedOn="{StaticResource {x:Type Button}}" >
+            <EventSetter Event="Click" Handler="Button_Click"/>
+            <Setter Property="Width" Value="27"/>
+        </Style>
+        
+        <Style TargetType="{x:Type RadioButton}">
+            <EventSetter Event="ToggleButton.Checked" Handler="ColorRadioButton_Checked"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        
+        <Style TargetType="{x:Type Border}" x:Key="BordePanel">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        
+        <Style TargetType="{x:Type Border}" x:Key="BorderPixel">
+            <EventSetter Event="MouseLeftButtonDown" Handler="Border_MouseLeftButtonDown"/>
+            <EventSetter Event="MouseEnter" Handler="Border_MouseEnter"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+        </Style>
+        
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="#813919"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+        
+        <Style TargetType="{x:Type TextBlock}" x:Key="AlumnoFormato">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="172"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="CuadriculaPersonalizada">
+            <Setter Property="ToolTip" Value="Número entero positivo"/>
+            <Setter Property="Text" Value="ej. 60"/>
+            <Setter Property="Margin" Value="15,0,10,0"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <EventSetter Event="KeyDown" Handler="PanelPersonalizadoTextBox_KeyDown"/>
+            <EventSetter Event="GotFocus" Handler="PanelPersonalizadoTextBox_GotFocus"/>
+            <EventSetter Event="LostFocus" Handler="PanelPersonalizadoTextBox_LostFocus"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="285*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Grid.Row="0" Grid.Column="0" Margin="10">
+            <GroupBox Header="Tamaño panel">
+                <StackPanel>
+                    <Button x:Name="smallButton" Tag="5" ToolTip="De 5 x 5" Click="ResizePanel" Content="Pequeño"/>
+                    <Button x:Name="mediumButton" Tag="15" ToolTip="De 15 x 15" Click="ResizePanel" Content="Mediano"/>
+                    <Button x:Name="bigButton" Tag="25" ToolTip="De 25 x 25" Click="ResizePanel" Content="Grande"/>
+                    <TextBlock Margin="5,0,5,5" FontSize="13"><Run Text="Personalizado"/></TextBlock>
+                    <TextBox x:Name="panelPersonalizadoTextBox"
+                             Style="{StaticResource CuadriculaPersonalizada}"/>
+                    <TextBlock x:Name="errorNumero" Foreground="Red" Margin="10,0,5,5" Visibility="Collapsed">
+                        <Run Text="Introduce un número"/>
+                        <LineBreak/>
+                        <Run Text="entre 1 y 100."/>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox  Header="Color">
+                <StackPanel>
+                    <RadioButton Tag="#FFFFFF" Content="Blanco"/>
+                    <RadioButton Tag="#000000" Content="Negro"/>
+                    <RadioButton Tag="#E60026" Content="Rojo"/>
+                    <RadioButton Tag="#26D037" Content="Verde"/>
+                    <RadioButton Tag="#38C6FF" Content="Azul"/>
+                    <RadioButton Tag="#FBFF38" Content="Amarillo"/>
+                    <RadioButton Tag="#FF8C20" Content="Naranja"/>
+                    <RadioButton Tag="#FFB6C1" Content="Rosa"/>
+                    <RadioButton x:Name="colorPersonalizadoRadioButton" 
+                                 Tag="Personalizado"
+                                 Unchecked="PersonalizadoRadioButton_Unchecked" 
+                                 IsChecked="True" 
+                                 Content="Personalizado"
+                                 Foreground="#FF8000"/>
+                    <TextBox x:Name="colorPersonalizadoTextBox" 
+                             Tag="Personalizado" 
+                             Text="#FF8000"
+                             IsEnabled="True" 
+                             Margin="20,5,5,5" 
+                             KeyDown="ColorPersonalizadoTextBox_KeyDown"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox  Header="Opciones extra">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Width="27" ToolTip="Rellenar" Click="RellenarButton_Click">
+                        <Image Source="Assets/rellenar.png" Width="20"  HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button ToolTip="Borde" Style="{StaticResource ConfigurarBorde}">
+                        <Image Source="Assets/borde.png" Width="22" HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button ToolTip="Sin borde" Style="{StaticResource ConfigurarBorde}">
+                        <Image Source="Assets/sinborde.png" Width="22" HorizontalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Alumno">
+                <TextBlock Style="{StaticResource AlumnoFormato}">
+                    Carlos Puente
+                </TextBlock>
+            </GroupBox>
+        </StackPanel>
+        <Border x:Name="borderPixelPanelGrid" Grid.Row="0" Grid.Column="1" Style="{StaticResource BordePanel}">
+            <UniformGrid x:Name="pixelPanelGrid"/>
+        </Border>
+    </Grid>
+</Window>

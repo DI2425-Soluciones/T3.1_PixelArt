@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>T3._1_PixelArt</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\borde.png" />
+    <None Remove="Assets\icon.ico" />
+    <None Remove="Assets\question.png" />
+    <None Remove="Assets\rellenar.png" />
+    <None Remove="Assets\sinborde.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\borde.png" />
+    <Resource Include="Assets\icon.ico" />
+    <Resource Include="Assets\question.png" />
+    <Resource Include="Assets\rellenar.png" />
+    <Resource Include="Assets\sinborde.png" />
+  </ItemGroup>
+
+</Project>
